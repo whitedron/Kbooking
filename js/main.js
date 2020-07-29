@@ -15,7 +15,7 @@ var VALID_COORDINATE_RIGHT = 1175;
 var VALID_COORDINATE_TOP = 180;
 var VALID_COORDINATE_BOTTOM = 700;
 
-
+////////////////// функция  возврата целого числа в заданном диапазоне
 var getRandomInteger = function (min, max) {
     var randomvalue = min + Math.random() * (max + 1 - min);
     return Math.floor(randomvalue);
@@ -23,6 +23,8 @@ var getRandomInteger = function (min, max) {
 
 var startNum = getRandomInteger(0, ADS_COUNT - 1);
 
+
+////////////// Функция генерации данных объявления
 var generateAd = function (numAvatar) {
     if (numAvatar < 10) {
         var avatar = 'img/avatars/user0' + numAvatar + '.png';
@@ -44,9 +46,9 @@ var generateAd = function (numAvatar) {
     }
 
     var address = {
-      x:getRandomInteger(VALID_COORDINATE_LEFT, VALID_COORDINATE_RIGHT),
-      y:getRandomInteger(VALID_COORDINATE_TOP, VALID_COORDINATE_BOTTOM)  
-    } ;
+        x: getRandomInteger(VALID_COORDINATE_LEFT, VALID_COORDINATE_RIGHT),
+        y: getRandomInteger(VALID_COORDINATE_TOP, VALID_COORDINATE_BOTTOM)
+    };
 
     return {
         author: {
@@ -57,8 +59,8 @@ var generateAd = function (numAvatar) {
             address: address.x + ', ' + address.y,
             price: getRandomInteger(1, 1000) * 10,
             type: HOME_TYPE[getRandomInteger(0, HOME_TYPE.length - 1)],
-            rooms: getRandomInteger(1, MAX_ROOM_COUNT),
-            guests: getRandomInteger(1, MAX_GUEST_COUNT),
+            rooms: getRandomInteger(0, MAX_ROOM_COUNT),
+            guests: getRandomInteger(0, MAX_GUEST_COUNT),
             checkin: CHECK_TIME[getRandomInteger(0, CHECK_TIME.length - 1)],
             checkout: CHECK_TIME[getRandomInteger(0, CHECK_TIME.length - 1)],
             features: features,
@@ -84,7 +86,7 @@ var renderPin = function (ad) {
     return newPin;
 }
 
-
+///////////////////// Функция создания и вывода содержимого объявления
 var renderAdCard = function (ad) {
     var homeTypeMap = new Map([
         ['flat', 'Квартира'],
@@ -92,23 +94,79 @@ var renderAdCard = function (ad) {
         ['house', 'Дом'],
         ['palace', 'Дворец']
     ]);
-    var cardTemplate = document.querySelector('#card').content;
-    var adCard = cardTemplate.cloneNode(true);
-    adCard.querySelector('.popup__title').textContent = ad.offer.title;
-    adCard.querySelector('.popup__text--address').textContent = ad.offer.address;
-    adCard.querySelector('.popup__text--price').textContent = ad.offer.price + '\u20bd/ночь';
 
-    if (homeTypeMap.get(ad.offer.type)) {
-    adCard.querySelector('.popup__type').textContent=homeTypeMap.get(ad.offer.type)
-    } else {
-        adCard.querySelector('.popup__type').classList.add('hidden')  
+    /////////////// функция простой проверки и вывода данных
+    var RenderAdData = function (node, data) {
+        if (data) {
+            node.textContent = data
+        } else {
+            node.classList.add('hidden')
+        }
     }
 
-    adCard.querySelector('.popup__text--capacity').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
-    adCard.querySelector('.popup__text--time').textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
-    adCard.querySelector('.popup__description').textContent = ad.offer.description;
-    adCard.querySelector('.popup__avatar').src = ad.author.avatar;
+    var cardTemplate = document.querySelector('#card').content;
+    var adCard = cardTemplate.cloneNode(true);
 
+    RenderAdData(adCard.querySelector('.popup__title'), ad.offer.title);
+    RenderAdData(adCard.querySelector('.popup__text--address'), ad.offer.address);
+    RenderAdData(adCard.querySelector('.popup__description'), ad.offer.description);
+
+//////// Проверка цены
+    if (ad.offer.price) {
+        adCard.querySelector('.popup__text--price').textContent = ad.offer.price + '\u20bd/ночь'
+    } else {
+        adCard.querySelector('.popup__text--price').classList.add('hidden');
+    }
+
+
+////////// Проверка типа жилища
+    if (homeTypeMap.get(ad.offer.type)) {
+        adCard.querySelector('.popup__type').textContent = homeTypeMap.get(ad.offer.type)
+    } else {
+        adCard.querySelector('.popup__type').classList.add('hidden')
+    }
+/////////// Проверка и вывод числа комнат и гостей
+    var textContent = '';
+    if (ad.offer.rooms) {
+        textContent = ad.offer.rooms + ' комнаты ';
+    }
+    if (ad.offer.guests) {
+        if (textContent) {
+            textContent += 'для ' + ad.offer.guests + ' гостей'
+        } else {
+            textContent = 'Для ' + ad.offer.guests + ' гостей'
+        }
+    }
+    if (textContent) {
+        adCard.querySelector('.popup__text--capacity').textContent = textContent
+    } else {
+        adCard.querySelector('.popup__text--capacity').classList.add('hidden')
+    }
+//////////// Проверка и вывод времени заезда и выезда
+    textContent = '';
+    if (ad.offer.checkin) {
+        textContent = 'Заезд после ' + ad.offer.checkin;
+        if (ad.offer.checkout) {
+            textContent += ', выезд до ' + ad.offer.checkout
+        }
+    } else {
+        if (ad.offer.checkout) {
+            textContent += 'Выезд до ' + ad.offer.checkout
+        }
+    }
+    if (textContent) {
+        adCard.querySelector('.popup__text--time').textContent = textContent
+    } else {
+        adCard.querySelector('.popup__text--time').classList.add('hidden')
+    }
+/////////// Проверка и вывод аватара пользователя
+    if (ad.author.avatar) {
+        adCard.querySelector('.popup__avatar').src = ad.author.avatar
+    } else {
+        adCard.querySelector('.popup__avatar').classList.add('hidden');
+    }
+
+////////// Проверка и вывод достоинств жилища
     for (var i = 0; i < FEATYRES_LIST.length; i++) {
         if (!ad.offer.features.includes(FEATYRES_LIST[i])) {
             adCard.querySelector('.popup__feature--' + FEATYRES_LIST[i]).remove();
@@ -125,6 +183,7 @@ var renderAdCard = function (ad) {
         newPhoto.src = ad.offer.photos[i];
         photoList.appendChild(newPhoto);
     }
+  ////// добавление объявление в DOM
     document.querySelector('.map').insertBefore(adCard, document.querySelector('.map__filters-container'));
 }
 
@@ -132,7 +191,7 @@ for (var i = 0; i < ADS_COUNT; i++) {
     ads[i] = generateAd(((i + startNum) % ADS_COUNT) + 1);
     console.log(ads[i]);
     fragment.appendChild(renderPin(ads[i]));
- 
+
 };
 document.querySelector('.map__pins').appendChild(fragment);
 
