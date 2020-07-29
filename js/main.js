@@ -4,8 +4,16 @@ var ads = [];
 var HOME_TYPE = ['palace', 'flat', 'house', 'bungalo'];
 var CHECK_TIME = ['12:00', '13:00', '14:00'];
 var FEATYRES_LIST = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var PIN_OFFSET_X = 25;
-var PIN_OFFSET_Y = 70;
+var PIN_OFFSET_X = -25;
+var PIN_OFFSET_Y = -70;
+var MAX_PHOTO_COUNT = 8;
+var MAX_PHOTO_NUM = 280;
+var MAX_ROOM_COUNT = 8;
+var MAX_GUEST_COUNT = 10;
+var VALID_COORDINATE_LEFT = 25;
+var VALID_COORDINATE_RIGHT = 1175;
+var VALID_COORDINATE_TOP = 180;
+var VALID_COORDINATE_BOTTOM = 700;
 
 var getRandomInteger = function (min, max) {
     var randomvalue = min + Math.random() * (max + 1 - min);
@@ -29,11 +37,15 @@ var generateAd = function (numAvatar) {
     }
 
     var photos = [];
-    var photoCount = getRandomInteger(0, 8);
+    var photoCount = getRandomInteger(0, MAX_PHOTO_COUNT);
     for (var i = 0; i < photoCount; i++) {
-        photos[i] = 'img/photos/hotel_' + getRandomInteger(1, 280) + '.jpg'
+        photos[i] = 'img/photos/hotel_' + getRandomInteger(1, MAX_PHOTO_NUM) + '.jpg'
     }
 
+    var address = {
+      x:getRandomInteger(VALID_COORDINATE_LEFT, VALID_COORDINATE_RIGHT),
+      y:getRandomInteger(VALID_COORDINATE_TOP, VALID_COORDINATE_BOTTOM)  
+    } ;
 
     return {
         author: {
@@ -41,11 +53,11 @@ var generateAd = function (numAvatar) {
         },
         offer: {
             title: 'Шикарное предложение',
-            address: getRandomInteger(0, 600) + ', ' + getRandomInteger(0, 300),
+            address: address.x + ', ' + address.y,
             price: getRandomInteger(1, 1000) * 10,
             type: HOME_TYPE[getRandomInteger(0, HOME_TYPE.length - 1)],
-            rooms: getRandomInteger(1, 8),
-            guests: getRandomInteger(1, 10),
+            rooms: getRandomInteger(1, MAX_ROOM_COUNT),
+            guests: getRandomInteger(1, MAX_GUEST_COUNT),
             checkin: CHECK_TIME[getRandomInteger(0, CHECK_TIME.length - 1)],
             checkout: CHECK_TIME[getRandomInteger(0, CHECK_TIME.length - 1)],
             features: features,
@@ -53,8 +65,8 @@ var generateAd = function (numAvatar) {
             photos: photos
         },
         location: {
-            x: getRandomInteger(1, 1199),
-            y: getRandomInteger(130, 630)
+            x: address.x,
+            y: address.y
         }
 
     }
@@ -71,6 +83,20 @@ var renderPin = function (ad) {
     return newPin;
 }
 
+var renderPoint = function (ad) {
+    var node = document.createElement('div');
+  
+    node.style = 'z-index:100; margin: 0 auto; text-align: center; background-color: red';
+    node.style.position = 'absolute';
+    node.style.left = ad.location.x+'px';
+    node.style.width = '1px';
+    node.style.height= '25px';
+    node.style.top=ad.location.y+'px';
+    node.style.fontSize = '0px';
+    node.style.boxSizing='border-box';
+  
+    return node;
+}
 var renderAdCard = function (ad) {
     var cardTemplate = document.querySelector('#card').content;
     var adCard = cardTemplate.cloneNode(true);
@@ -122,9 +148,10 @@ for (var i = 0; i < ADS_COUNT; i++) {
     ads[i] = generateAd(((i + startNum) % ADS_COUNT) + 1);
     console.log(ads[i]);
     fragment.appendChild(renderPin(ads[i]));
+  //  fragment.appendChild(renderPoint(ads[i]));
 };
 document.querySelector('.map__pins').appendChild(fragment);
 
-renderAdCard(ads[0]);
+//renderAdCard(ads[0]);
 document.querySelector('.map').classList.remove('map--faded');
 
