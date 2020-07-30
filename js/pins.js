@@ -5,10 +5,6 @@ var PIN_OFFSET_Y = -70;
 
 
 
-
-////////////// Функция генерации данных объявления
-
-
 var pinTemplate = document.querySelector('#pin').content;
 var fragment = document.createDocumentFragment();
 
@@ -22,10 +18,10 @@ var renderPin = function (ad) {
 
 
 
-for (var i = 0; i < window.ads.length; i++) {
+/* for (var i = 0; i < window.ads.length; i++) {
     fragment.appendChild(renderPin(window.ads[i]));
 };
-document.querySelector('.map__pins').appendChild(fragment);
+document.querySelector('.map__pins').appendChild(fragment); */
 
 
 document.querySelector('.map').classList.remove('map--faded');

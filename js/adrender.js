@@ -105,5 +105,5 @@ var renderAdCard = function (ad) {
 }
 
 
-renderAdCard(window.ads[0]);
+//renderAdCard(window.ads[0]);
 })()
