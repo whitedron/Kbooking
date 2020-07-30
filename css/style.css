@@ -166,7 +166,8 @@ fieldset {
  */
 
 .map__pin {
-  position: absolute;
+   position: absolute; 
+
   z-index: 1;
 
   width: 50px;
