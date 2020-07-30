@@ -24,6 +24,6 @@ var renderPin = function (ad) {
 document.querySelector('.map__pins').appendChild(fragment); */
 
 
-document.querySelector('.map').classList.remove('map--faded');
+//document.querySelector('.map').classList.remove('map--faded');
 //renderAdCard(window.ads[0]);
 })()
