@@ -33,6 +33,7 @@ var activateBooking = function(){
   console.log(mainPin.clientWidth);
   
   getMainPinAddress();
+  window.renderPins();
 }
 
 
