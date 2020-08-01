@@ -104,6 +104,6 @@ var renderAdCard = function (ad) {
     document.querySelector('.map').insertBefore(adCard, document.querySelector('.map__filters-container'));
 }
 
-
+window.renderAdCard = renderAdCard;
 //renderAdCard(window.ads[0]);
 })()

@@ -73,9 +73,11 @@ var generateAd = function (numAvatar) {
     }
 }
 
+
 for (var i = 0; i < ADS_COUNT; i++) {
     ads[i] = generateAd(((i + startNum) % ADS_COUNT) + 1);
-    console.log(ads[i]);
+   // console.log(ads[i]);
+   
 };
 
 window.ads = ads;
