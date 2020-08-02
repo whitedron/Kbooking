@@ -2,6 +2,21 @@
 (function(){
 
 var FEATYRES_LIST = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var ESC_KEY = 'Escape';
+
+var removeAdPopup = function(){
+    document.querySelector('.popup').remove();
+}
+
+var onCloseAdCardClick = function(){
+    removeAdPopup();
+}
+
+var onAdEscPress = function(evt){
+ if (evt.key === ESC_KEY && document.querySelector('.map').querySelector('.popup')) {
+    removeAdPopup();
+ }
+}
 
 ///////////////////// Функция создания и вывода содержимого объявления
 var renderAdCard = function (ad) {
@@ -11,6 +26,12 @@ var renderAdCard = function (ad) {
         ['house', 'Дом'],
         ['palace', 'Дворец']
     ]);
+
+    if (document.querySelector('.map').querySelector('.popup')) {
+        removeAdPopup();
+     }
+
+
 
     /////////////// функция простой проверки и вывода данных
     var RenderAdData = function (node, data) {
@@ -100,6 +121,10 @@ var renderAdCard = function (ad) {
         newPhoto.src = ad.offer.photos[i];
         photoList.appendChild(newPhoto);
     }
+
+ adCard.querySelector('.popup__close').addEventListener('click',onCloseAdCardClick);
+ document.addEventListener('keydown', onAdEscPress);
+
   ////// добавление объявление в DOM
     document.querySelector('.map').insertBefore(adCard, document.querySelector('.map__filters-container'));
 }

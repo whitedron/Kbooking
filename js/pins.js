@@ -13,7 +13,8 @@
         if (!evt.button && clickedNode.classList.contains('map__pin') && !clickedNode.classList.contains('map__pin--main')) {
 
             var clickedPinNum = clickedNode.dataset.index;
-            alert('clicked pin # ' + clickedPinNum);
+           // alert('clicked pin # ' + clickedPinNum);
+            renderAdCard(window.ads[clickedPinNum]);
         }
     }
 
