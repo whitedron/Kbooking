@@ -383,6 +383,8 @@ fieldset {
           box-shadow: 0 0 2px 2px #ff6547;
 }
 
+
+
 .map__feature {
   display: inline-block;
   overflow: hidden;
@@ -599,6 +601,11 @@ fieldset {
   padding-bottom: 5px;
 }
 
+.ad-form__element .ad-form__element--invalid {
+  border: 6px solid #ff0000;
+  border-color: #ff0000;
+} 
+
 .ad-form__element input,
 .ad-form__element select,
 .ad-form__element textarea {
@@ -628,6 +635,8 @@ fieldset {
   -webkit-box-shadow: 0 0 2px 2px #ff6547;
           box-shadow: 0 0 2px 2px #ff6547;
 }
+
+
 
 .ad-form__element--time {
   -ms-flex-preferred-size: 50%;

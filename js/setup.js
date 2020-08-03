@@ -51,4 +51,10 @@
 
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
     mainPin.addEventListener('keydown', onMainPinKeyDown);
+
+    var roomNumerInput = document.querySelector('#room_number');
+    var capacityInput = document.querySelector('#capacity');
+    roomNumerInput.addEventListener('change',window.verifyCapacity);
+    capacityInput.addEventListener('change',window.verifyCapacity);
+
 })()

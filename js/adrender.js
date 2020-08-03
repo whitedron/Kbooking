@@ -27,6 +27,7 @@ var renderAdCard = function (ad) {
         ['palace', 'Дворец']
     ]);
 
+    ///////// если открыто объявление, то закрываем его
     if (document.querySelector('.map').querySelector('.popup')) {
         removeAdPopup();
      }
