@@ -63,8 +63,7 @@
     var titleInput = document.querySelector('#title');
     roomNumerInput.addEventListener('change',window.verifyCapacity);
     capacityInput.addEventListener('change',window.verifyCapacity);
-//    titleInput.addEventListener('change',onTitleInputKeyPress);
- //   titleInput.addEventListener('blur',onTitleInputKeyPress);
+
     titleInput.addEventListener('input',onTitleInputKeyPress);
     var checkinTimeInput = document.querySelector('#timein');
     var checkoutTimeInput = document.querySelector('#timeout');
@@ -74,4 +73,6 @@
     checkoutTimeInput.addEventListener('change', function(){
         window.checkinCheckoutSync(checkoutTimeInput, checkinTimeInput) 
     })
+    titleInput.minLength = 0;
+    titleInput.required = false;
 })()
