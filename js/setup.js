@@ -53,10 +53,6 @@
         window.verifyTitle();
     };
 
-    var onTitleInputFocus = function(){
-        window.clearTitleValidity();
-    };
-
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
     mainPin.addEventListener('keydown', onMainPinKeyDown);
 
@@ -67,8 +63,15 @@
     var titleInput = document.querySelector('#title');
     roomNumerInput.addEventListener('change',window.verifyCapacity);
     capacityInput.addEventListener('change',window.verifyCapacity);
-    titleInput.addEventListener('change',onTitleInputKeyPress);
+//    titleInput.addEventListener('change',onTitleInputKeyPress);
  //   titleInput.addEventListener('blur',onTitleInputKeyPress);
     titleInput.addEventListener('input',onTitleInputKeyPress);
-
+    var checkinTimeInput = document.querySelector('#timein');
+    var checkoutTimeInput = document.querySelector('#timeout');
+    checkinTimeInput.addEventListener('change', function(){
+        window.checkinCheckoutSync(checkinTimeInput, checkoutTimeInput) 
+    });
+    checkoutTimeInput.addEventListener('change', function(){
+        window.checkinCheckoutSync(checkoutTimeInput, checkinTimeInput) 
+    })
 })()

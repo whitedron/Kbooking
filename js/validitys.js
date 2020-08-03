@@ -61,9 +61,14 @@ var titleVerify = function(){
     startingTitleLettersCount=titleInput.value.length;
 }
 
-
+var checkinTimeInput = document.querySelector('#timein');
+var checkoutTimeInput = document.querySelector('#timeout');
+var checkinCheckoutSync = function(first, second){
+    second.value = first.value;
+}
 
 window.verifyCapacity = capacityVeriry;
 window.verifyTitle = titleVerify;
 window.clearTitleValidity = clearTitleValidity;
+window.checkinCheckoutSync = checkinCheckoutSync;
 })()
