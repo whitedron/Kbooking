@@ -14,8 +14,8 @@
     })
 
     var getMainPinAddress = function () {
-        console.log(mainPin.offsetLeft + MAIN_PIN_OFFSET_X);
-        console.log(mainPin.offsetTop + MAIN_PIN_OFFSET_Y);
+      /*   console.log(mainPin.offsetLeft + MAIN_PIN_OFFSET_X);
+        console.log(mainPin.offsetTop + MAIN_PIN_OFFSET_Y); */
         newAdForm.querySelector('#address').value = (mainPin.offsetLeft + MAIN_PIN_OFFSET_X) + ', ' + (mainPin.offsetTop + MAIN_PIN_OFFSET_Y);
     }
 
@@ -61,18 +61,33 @@
     var roomNumerInput = document.querySelector('#room_number');
     var capacityInput = document.querySelector('#capacity');
     var titleInput = document.querySelector('#title');
+    var checkinTimeInput = document.querySelector('#timein');
+    var checkoutTimeInput = document.querySelector('#timeout');
+    var priceInput = document.querySelector('#price');
+    var typeInput = document.querySelector('#type');
+
     roomNumerInput.addEventListener('change',window.verifyCapacity);
     capacityInput.addEventListener('change',window.verifyCapacity);
 
     titleInput.addEventListener('input',onTitleInputKeyPress);
-    var checkinTimeInput = document.querySelector('#timein');
-    var checkoutTimeInput = document.querySelector('#timeout');
+
     checkinTimeInput.addEventListener('change', function(){
         window.checkinCheckoutSync(checkinTimeInput, checkoutTimeInput) 
     });
     checkoutTimeInput.addEventListener('change', function(){
         window.checkinCheckoutSync(checkoutTimeInput, checkinTimeInput) 
-    })
+    });
+
+    typeInput.addEventListener('change',window.changeType);
+
+    /* priceInput.addEventListener('keydown',function(evt){
+        console.log(evt.key);
+        //this.value=this.value.replace(/[^0-9]/g,'');
+    }) */
+
+    priceInput.addEventListener('input',window.priceVerify);
+
     titleInput.minLength = 0;
     titleInput.required = false;
+    priceInput.required = false;
 })()
