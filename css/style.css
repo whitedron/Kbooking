@@ -606,6 +606,13 @@ fieldset {
   border-color: #ff0000;
 } 
 
+.ad-form__element input:invalid,
+.ad-form__element select:invalid,
+.ad-form__element textarea:invalid {
+  border: 6px solid #ff0000;
+  border-color: #ff0000;
+} 
+
 .ad-form__element input,
 .ad-form__element select,
 .ad-form__element textarea {
