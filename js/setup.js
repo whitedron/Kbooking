@@ -13,49 +13,11 @@
         item.disabled = true;
     })
 
-    var getMainPinAddress = function () {
-      /*   console.log(mainPin.offsetLeft + MAIN_PIN_OFFSET_X);
-        console.log(mainPin.offsetTop + MAIN_PIN_OFFSET_Y); */
-        newAdForm.querySelector('#address').value = (mainPin.offsetLeft + MAIN_PIN_OFFSET_X) + ', ' + (mainPin.offsetTop + MAIN_PIN_OFFSET_Y);
-    }
-
-    var activateBooking = function () {
-
-        document.querySelector('.map').classList.remove('map--faded');
-        document.querySelector('.ad-form').classList.remove('ad-form--disabled');
-        newAdFormFieldsets.forEach(function (item) {
-            item.disabled = false;
-        })
-        mainPin.removeEventListener('keydown', onMainPinKeyDown);
-        mainPin.removeEventListener('mousedown', onMainPinMouseDown);
-        console.log(mainPin.clientHeight);
-
-        console.log(mainPin.clientWidth);
-
-        getMainPinAddress();
-        window.renderPins();
-    }
-
-
-    var onMainPinMouseDown = function (evt) {
-        if (!evt.button) {
-            activateBooking();
-        }
-    }
-
-    var onMainPinKeyDown = function (evt) {
-        if (evt.key === ENTER_KEY) {
-            activateBooking();
-        }
-    }
+  
 
     var onTitleInputKeyPress = function(){
         window.verifyTitle();
     };
-
-    mainPin.addEventListener('mousedown', onMainPinMouseDown);
-    mainPin.addEventListener('keydown', onMainPinKeyDown);
-
 
 
     var roomNumerInput = document.querySelector('#room_number');
@@ -79,11 +41,6 @@
     });
 
     typeInput.addEventListener('change',window.changeType);
-
-    /* priceInput.addEventListener('keydown',function(evt){
-        console.log(evt.key);
-        //this.value=this.value.replace(/[^0-9]/g,'');
-    }) */
 
     priceInput.addEventListener('input',window.priceVerify);
 
