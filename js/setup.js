@@ -44,9 +44,11 @@
         window.booking.deactivate();
         window.pins.remove();
         window.form.reset();
+        window.message('success');
     }
     var onSaveError = function(errorMessage){
         window.backend.show(errorMessage, 'red', 5000);
+        window.message('error');
     }
 
     var onSubmitClick = function(evt){
