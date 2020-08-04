@@ -73,12 +73,14 @@ var generateAd = function (numAvatar) {
     }
 }
 
-
+var generateAds = function(){
 for (var i = 0; i < ADS_COUNT; i++) {
     ads[i] = generateAd(((i + startNum) % ADS_COUNT) + 1);
    // console.log(ads[i]);
    
 };
+}
 
+window.generateAds = generateAds;
 window.ads = ads;
 })()

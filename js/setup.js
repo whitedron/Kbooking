@@ -19,6 +19,17 @@
         window.verifyTitle();
     };
 
+    var onLoad=function(loadedAds){
+        window.ads = loadedAds;
+    }
+
+    var onError=function(errorMessage){
+        window.generateAds();
+        window.backend.show(errorMessage, 'red', 5000);
+    }
+
+
+    window.backend.load(onLoad, onError); 
 
     var roomNumerInput = document.querySelector('#room_number');
     var capacityInput = document.querySelector('#capacity');
