@@ -25,10 +25,22 @@
             item.disabled = false;
         })
         mainPin.removeEventListener('keydown', onMainPinKeyDown);
-       // mainPin.removeEventListener('mousedown', onMainPinMouseDown);
 
         getMainPinAddress();
-        window.renderPins();
+        window.pins.render();
+    }
+
+    var deactivateBooking = function () {
+
+        document.querySelector('.map').classList.add('map--faded');
+        document.querySelector('.ad-form').classList.add('ad-form--disabled');
+        newAdFormFieldsets.forEach(function (item) {
+            item.disabled = true;
+        })
+        mainPin.addEventListener('keydown', onMainPinKeyDown);
+
+        mainPin.style = 'left: 570px; top: 375px;';
+        //window.renderPins();
     }
 
 
@@ -97,5 +109,15 @@
 
     mainPin.addEventListener('mousedown', onMainPinMouseDown);
     mainPin.addEventListener('keydown', onMainPinKeyDown);
+
+
+    window.mainPin = {
+        getAddress: getMainPinAddress
+    }
+
+    window.booking = {
+        activate : activateBooking,
+        deactivate : deactivateBooking
+    }
 
 })()

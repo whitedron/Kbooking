@@ -3,6 +3,10 @@
     var PIN_OFFSET_X = -25;
     var PIN_OFFSET_Y = -70;
 
+    var map = document.querySelector('.map__pins');
+    var pins = map.querySelectorAll('.map__pin');
+
+
     var onMapClick = function (evt) {
 
         //// ищем ближайшую родительскую кнопку - верхний элемент пина
@@ -43,8 +47,22 @@
         document.querySelector('.map__pins').addEventListener('mousedown', onMapClick)
         window.pinsList = pinsNodeList;
     }
+    var removePins = function(){
+        if (document.querySelector('.popup')) {
+         document.querySelector('.popup').remove();
+        }
+        map.querySelectorAll('.map__pin').forEach(function (item) {
+            if (!item.classList.contains('map__pin--main')) {
+            item.remove();
+            }
+        })
 
-    window.renderPins = renderPins;
+    };
+
+    window.pins = {
+        render : renderPins,
+        remove : removePins
+    }
 
     //document.querySelector('.map').classList.remove('map--faded');
     //renderAdCard(window.ads[0]);

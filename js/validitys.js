@@ -19,7 +19,7 @@ var capacityVeriry = function(){
       capacityInput.setCustomValidity('');
   } else {
     capacityInput.setCustomValidity('Несоответствие числе комнат и гостей');
-    capacityInput.checkValidity();
+   // capacityInput.checkValidity();
     capacityInput.reportValidity();
   }
 }
@@ -81,15 +81,17 @@ var changeType = function(){
 
 //////////////////////// проверки допустимой цены
 var priceVerify = function(){
+    priceInput.required= true;
     priceInput.setCustomValidity('');
-    if (priceInput.validity.rangeOverflow) {
+  //  priceInput.checkValidity();
+    if (priceInput.validity.rangeOverflow || Number(priceInput.value)>Number(priceInput.max)) {
         priceInput.setCustomValidity('Цена за ночь не более '+ priceInput.max);
     };
-    if (priceInput.validity.rangeUnderflow) {
+    if (priceInput.validity.rangeUnderflow || Number(priceInput.value)<Number(priceInput.min)) {
         priceInput.setCustomValidity('Цена за ночь для жилья типа ' + homeTypeMap.get(typeInput.value) + ' не менее '+ priceInput.min);
     };
-    if (priceInput.validity.valueMissing) {
-        priceInput.setCustomValidity('Введено не натуральное число');
+    if (priceInput.validity.valueMissing || !priceInput.value) {
+        priceInput.setCustomValidity('Не заполнено обязательное поле');
     };
     if (priceInput.validity.badInput) {
         priceInput.setCustomValidity('Введено не натуральное число');

@@ -3,7 +3,7 @@
 (function()  {
 
 var URL_LOAD='https://javascript.pages.academy/keksobooking/data';
-var URL_SAVE='https://javascript.pages.academy/kekstagram';
+var URL_SAVE='https://javascript.pages.academy/keksobooking';
 var XHR_TIMEOUT=10000;
 
     var load = function (onLoad, onError) {
