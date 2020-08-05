@@ -58,7 +58,7 @@
         window.setTitleLimits();
         window.verifyTitle();
 
-        if (typeInput.checkValidity() && capacityInput.checkValidity() && priceInput.checkValidity()){
+        if (titleInput.checkValidity() && capacityInput.checkValidity() && priceInput.checkValidity()){
 
         var uploadFormData = new FormData(newAdForm);
         window.backend.save(uploadFormData, onSave, onSaveError)

@@ -2,8 +2,8 @@
 (function () {
     var MAIN_PIN_OFFSET_X = 32;
     var MAIN_PIN_OFFSET_Y = 83;
-    var VALID_COORDINATE_LEFT = 25;
-    var VALID_COORDINATE_RIGHT = 1175;
+    var VALID_COORDINATE_LEFT = 1;
+    var VALID_COORDINATE_RIGHT = 1199;
     var VALID_COORDINATE_TOP = 180;
     var VALID_COORDINATE_BOTTOM = 700;
 
@@ -11,46 +11,12 @@
 
     var mainPin = document.querySelector('.map__pin--main');
     var newAdForm = document.querySelector('.ad-form');
-    var newAdFormFieldsets = newAdForm.querySelectorAll('fieldset');
     var filterForm = document.querySelector('.map__filters');
-    var filterFormItems = filterForm.querySelectorAll('select, fieldset');
     
     var getMainPinAddress = function () {
           newAdForm.querySelector('#address').value = (mainPin.offsetLeft + MAIN_PIN_OFFSET_X) + ', ' + (mainPin.offsetTop + MAIN_PIN_OFFSET_Y);
       }
 
-   /*  var activateBooking = function () {
-
-        document.querySelector('.map').classList.remove('map--faded');
-        document.querySelector('.ad-form').classList.remove('ad-form--disabled');
-        newAdFormFieldsets.forEach(function (item) {
-            item.disabled = false
-        });
-        filterFormItems.forEach(function(item){
-            item.disabled = false
-        });
-        mainPin.removeEventListener('keydown', onMainPinKeyDown);
-
-        getMainPinAddress();
-        window.pins.render();
-    }
-
-    var deactivateBooking = function () {
-
-        document.querySelector('.map').classList.add('map--faded');
-        document.querySelector('.ad-form').classList.add('ad-form--disabled');
-        newAdFormFieldsets.forEach(function (item) {
-            item.disabled = true
-        })
-        filterFormItems.forEach(function(item){
-            item.disabled = true
-        });
-        mainPin.addEventListener('keydown', onMainPinKeyDown);
-
-        mainPin.style = 'left: 570px; top: 375px;';
-        //window.renderPins();
-    }
- */
 
     var onMainPinMouseDown = function (evt) {
         if (!evt.button) {
@@ -125,10 +91,5 @@
         getAddress: getMainPinAddress,
         keyDown: onMainPinKeyDown
     }
-
-  /*   window.booking = {
-        activate : activateBooking,
-        deactivate : deactivateBooking
-    } */
 
 })()
