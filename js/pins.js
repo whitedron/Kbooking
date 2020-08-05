@@ -6,7 +6,7 @@
 
     var map = document.querySelector('.map__pins');
     var pins = map.querySelectorAll('.map__pin');
-
+    var filteredData;
 
     var onMapClick = function (evt) {
 
@@ -19,7 +19,7 @@
 
             var clickedPinNum = clickedNode.dataset.index;
            // alert('clicked pin # ' + clickedPinNum);
-            renderAdCard(window.ads[clickedPinNum]);
+            renderAdCard(filteredData[clickedPinNum]);
         }
     }
 
@@ -35,12 +35,13 @@
     }
 
     var pinsNodeList = [];
-    var renderPins = function () {
+    var renderPins = function (adsArray) {
         var newNodePin;
+        filteredData = adsArray;
         var fragment = document.createDocumentFragment();
-        var adsCount = MAX_PINS<window.ads.length?MAX_PINS:window.ads.length;
+        var adsCount = MAX_PINS<adsArray.length?MAX_PINS:adsArray.length;
         for (var i = 0; i < adsCount; i++) {
-            newNodePin = renderPin(window.ads[i], i);
+            newNodePin = renderPin(adsArray[i], i);
             pinsNodeList[i] = newNodePin;
             fragment.appendChild(newNodePin);
 

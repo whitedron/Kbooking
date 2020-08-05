@@ -49,13 +49,14 @@
         mainPin.removeEventListener('keydown', window.mainPin.keyDown);
 
         window.mainPin.getAddress();
-        window.pins.render();
+        window.pins.render(window.ads);
     }
 
     var deactivateBooking = function () {
 
         document.querySelector('.map').classList.add('map--faded');
         document.querySelector('.ad-form').classList.add('ad-form--disabled');
+        filterForm.reset();
         newAdFormFieldsets.forEach(function (item) {
             item.disabled = true
         })
