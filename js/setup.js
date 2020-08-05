@@ -24,7 +24,7 @@
     titleInput.minLength = 0;
     titleInput.required = false;
     priceInput.required = false; */
-    window.form.disable();
+    window.form.deactivate();
   
 
     var onTitleInputKeyPress = function(){
@@ -41,7 +41,7 @@
     }
 
     var onSave = function(){
-        window.booking.deactivate();
+        window.form.deactivate();
         window.pins.remove();
         window.form.reset();
         window.message('success');

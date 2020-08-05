@@ -12,18 +12,23 @@
     var mainPin = document.querySelector('.map__pin--main');
     var newAdForm = document.querySelector('.ad-form');
     var newAdFormFieldsets = newAdForm.querySelectorAll('fieldset');
+    var filterForm = document.querySelector('.map__filters');
+    var filterFormItems = filterForm.querySelectorAll('select, fieldset');
     
     var getMainPinAddress = function () {
           newAdForm.querySelector('#address').value = (mainPin.offsetLeft + MAIN_PIN_OFFSET_X) + ', ' + (mainPin.offsetTop + MAIN_PIN_OFFSET_Y);
       }
 
-    var activateBooking = function () {
+   /*  var activateBooking = function () {
 
         document.querySelector('.map').classList.remove('map--faded');
         document.querySelector('.ad-form').classList.remove('ad-form--disabled');
         newAdFormFieldsets.forEach(function (item) {
-            item.disabled = false;
-        })
+            item.disabled = false
+        });
+        filterFormItems.forEach(function(item){
+            item.disabled = false
+        });
         mainPin.removeEventListener('keydown', onMainPinKeyDown);
 
         getMainPinAddress();
@@ -35,19 +40,23 @@
         document.querySelector('.map').classList.add('map--faded');
         document.querySelector('.ad-form').classList.add('ad-form--disabled');
         newAdFormFieldsets.forEach(function (item) {
-            item.disabled = true;
+            item.disabled = true
         })
+        filterFormItems.forEach(function(item){
+            item.disabled = true
+        });
         mainPin.addEventListener('keydown', onMainPinKeyDown);
 
         mainPin.style = 'left: 570px; top: 375px;';
         //window.renderPins();
     }
-
+ */
 
     var onMainPinMouseDown = function (evt) {
         if (!evt.button) {
             if(document.querySelector('.map').classList.contains('map--faded')) {
-                activateBooking();
+                //activateBooking();
+                window.form.activate();
             }
             var startCoords = {
                 x:evt.clientX,
@@ -103,7 +112,8 @@
 
     var onMainPinKeyDown = function (evt) {
         if (evt.key === ENTER_KEY) {
-            activateBooking();
+           // activateBooking();
+            window.form.activate();
         }
     }
 
@@ -112,12 +122,13 @@
 
 
     window.mainPin = {
-        getAddress: getMainPinAddress
+        getAddress: getMainPinAddress,
+        keyDown: onMainPinKeyDown
     }
 
-    window.booking = {
+  /*   window.booking = {
         activate : activateBooking,
         deactivate : deactivateBooking
-    }
+    } */
 
 })()

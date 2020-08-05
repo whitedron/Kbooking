@@ -2,6 +2,7 @@
 (function () {
     var PIN_OFFSET_X = -25;
     var PIN_OFFSET_Y = -70;
+    var MAX_PINS = 5;
 
     var map = document.querySelector('.map__pins');
     var pins = map.querySelectorAll('.map__pin');
@@ -37,7 +38,8 @@
     var renderPins = function () {
         var newNodePin;
         var fragment = document.createDocumentFragment();
-        for (var i = 0; i < window.ads.length; i++) {
+        var adsCount = MAX_PINS<window.ads.length?MAX_PINS:window.ads.length;
+        for (var i = 0; i < adsCount; i++) {
             newNodePin = renderPin(window.ads[i], i);
             pinsNodeList[i] = newNodePin;
             fragment.appendChild(newNodePin);

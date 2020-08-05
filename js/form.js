@@ -7,6 +7,9 @@
     var priceInput = document.querySelector('#price');
     var typeInput = document.querySelector('#type');
     var newAdFormFieldsets = newAdForm.querySelectorAll('fieldset');
+    var filterForm = document.querySelector('.map__filters');
+    var filterFormItems = filterForm.querySelectorAll('select, fieldset');
+    var mainPin = document.querySelector('.map__pin--main');
 
     var clearForm = function(){
         newAdForm.reset();
@@ -20,17 +23,60 @@
         capacityInput.setCustomValidity('');
     }
 
-    var disableForm = function(){
+/*     var disableForm = function(){
         newAdFormFieldsets.forEach(function (item) {
             item.disabled = true;
         })
+        filterFormItems.forEach(function(item){
+            item.disabled = true
+        })
+
         titleInput.minLength = 0;
         titleInput.required = false;
         priceInput.required = false;
+    } */
+
+    var activateBooking = function () {
+
+        document.querySelector('.map').classList.remove('map--faded');
+        document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+        newAdFormFieldsets.forEach(function (item) {
+            item.disabled = false
+        });
+        filterFormItems.forEach(function(item){
+            item.disabled = false
+        });
+        mainPin.removeEventListener('keydown', window.mainPin.keyDown);
+
+        window.mainPin.getAddress();
+        window.pins.render();
     }
+
+    var deactivateBooking = function () {
+
+        document.querySelector('.map').classList.add('map--faded');
+        document.querySelector('.ad-form').classList.add('ad-form--disabled');
+        newAdFormFieldsets.forEach(function (item) {
+            item.disabled = true
+        })
+        filterFormItems.forEach(function(item){
+            item.disabled = true
+        });
+        mainPin.addEventListener('keydown', window.mainPin.keyDown);
+
+        mainPin.style = 'left: 570px; top: 375px;';
+
+        titleInput.minLength = 0;
+        titleInput.required = false;
+        priceInput.required = false;
+        //window.renderPins();
+    }
+
+
 
     window.form = {
         reset: clearForm,
-        disable: disableForm
+        activate: activateBooking,
+        deactivate: deactivateBooking
     }
 })()
