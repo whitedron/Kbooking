@@ -59,7 +59,7 @@
                 mainPin.style.left = pinCoords.x + 'px';
                 mainPin.style.top = pinCoords.y + 'px';
 
-                newAdForm.querySelector('#title').value = (pinCoords.x) + ', ' + (pinCoords.y);
+           //     newAdForm.querySelector('#title').value = (pinCoords.x) + ', ' + (pinCoords.y);
                 getMainPinAddress();
             };
             var onMouseUp = function (upEvt) {

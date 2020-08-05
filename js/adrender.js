@@ -5,6 +5,7 @@ var FEATYRES_LIST = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'con
 var ESC_KEY = 'Escape';
 
 var removeAdPopup = function(){
+    window.pins.resetActive();
     document.querySelector('.popup').remove();
 }
 
@@ -32,7 +33,7 @@ var renderAdCard = function (ad) {
         removeAdPopup();
      }
 
-
+        window.pins.resetActive();
 
     /////////////// функция простой проверки и вывода данных
     var RenderAdData = function (node, data) {
