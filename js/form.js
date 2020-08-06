@@ -10,6 +10,8 @@
     var filterForm = document.querySelector('.map__filters');
     var filterFormItems = filterForm.querySelectorAll('select, fieldset');
     var mainPin = document.querySelector('.map__pin--main');
+    var avatarImg=newAdForm.querySelector('.ad-form-header__preview img');
+    var imagesContainer = newAdForm.querySelector('.ad-form__photo');
 
     var clearForm = function(){
         newAdForm.reset();
@@ -21,20 +23,11 @@
         priceInput.setCustomValidity('');
         titleInput.setCustomValidity('');
         capacityInput.setCustomValidity('');
+        imagesContainer.innerHTML='';
+        avatarImg.src = 'img/muffin-grey.svg';
     }
 
-/*     var disableForm = function(){
-        newAdFormFieldsets.forEach(function (item) {
-            item.disabled = true;
-        })
-        filterFormItems.forEach(function(item){
-            item.disabled = true
-        })
 
-        titleInput.minLength = 0;
-        titleInput.required = false;
-        priceInput.required = false;
-    } */
 
     var activateBooking = function () {
 

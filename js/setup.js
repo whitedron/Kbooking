@@ -22,12 +22,7 @@
     var imagesInput = newAdForm.querySelector('#images');
     var imagesContainer = newAdForm.querySelector('.ad-form__photo');
 
-  /*   newAdFormFieldsets.forEach(function (item) {
-        item.disabled = true;
-    })
-    titleInput.minLength = 0;
-    titleInput.required = false;
-    priceInput.required = false; */
+
     window.form.deactivate();
   
 
@@ -101,17 +96,8 @@
     avatarInput.addEventListener('change', onAvatarChange);
 
     var onImageChange=function(){
-       // if (window.choosePicture(avatarInput, avatarImg))
-       // var imgNode = document.createElement('img');
         imagesContainer.innerHTML='';
         var imgNode = avatarImg.cloneNode(true);
-        ///<img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">
-     //   imgNode.style.width = 40;
-     //   imgNode.style.height = 44;
-      //  imgNode.innerHTML = 'alt="Аватар пользователя" width="40" height="44"';
-      //  imagesContainer.insertAdjacentElement('afterbegin', imgNode);
-       // imagesContainer.insertBefore(imgNode, null);
-
         window.choosePicture(imagesInput, imgNode);
         imgNode.style.margin = '15px';
         imagesContainer.insertBefore(imgNode, null);
